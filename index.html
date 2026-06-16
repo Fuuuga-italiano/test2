@@ -93,32 +93,37 @@
             border-radius: 16px;
         }
 
-        /* 统一卡片样式 */
-        .book-card, .sub-card {
+        /* ===== 统一所有卡片样式 ===== */
+        .book-card, .sub-card, .scene-card {
             background: #FFFFFF;
             border: 1px solid #D0C8BC;
-            padding: 24px 12px;
+            padding: 16px 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            min-height: 80px;
+            border-radius: 20px;
+            min-height: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1rem;
+            font-weight: 590;
+            color: #24221B;
         }
-        .book-card:hover, .sub-card:hover {
+        .book-card:hover, .sub-card:hover, .scene-card:hover {
             transform: translateY(-3px);
             border-color: #F2D04E;
             background: #FFFDF8;
             box-shadow: 0 12px 20px rgba(0,0,0,0.05);
         }
-        .book-name, .sub-name {
+        .book-name, .sub-name, .scene-name {
             font-weight: 590;
             font-size: 1rem;
             color: #24221B;
         }
-        .book-desc { display: none; }
+        .book-desc, .scene-desc { display: none; }
 
         .global-header {
             background-color: #24221B;
@@ -199,11 +204,11 @@
         .collapsible-content { display: none; padding-top: 24px; }
         .collapsible-content.open { display: block; }
 
-        /* 网格布局统一 */
+        /* 网格布局 */
         .book-grid, .scene-grid, .sub-grid {
             display: grid;
             gap: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 0px;
         }
         .book-grid { grid-template-columns: repeat(3, 1fr); }
         .scene-grid { grid-template-columns: repeat(2, 1fr); }
@@ -218,16 +223,20 @@
         .unit-card {
             background: #FFFFFFF2;
             border: 1px solid #D0C8BC;
-            padding: 28px 12px;
+            padding: 16px 12px;
             cursor: pointer;
             transition: all 0.2s ease;
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
             border-radius: 20px;
-            min-height: 80px;
+            min-height: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #24221B;
         }
         .unit-card:hover { transform: translateY(-3px); border-color: #F2D04E; background: #FFFFF8; }
         .unit-title { font-weight: 600; font-size: 1.1rem; color: #24221B; }
@@ -555,14 +564,28 @@
             .chinese-text { font-size: 0.9rem; }
             .lyrics-viewport { height: 160px; }
             .lyric-line { min-height: 130px; padding: 0.8rem 0.5rem; }
+            .book-card, .sub-card, .scene-card, .unit-card { 
+                min-height: 56px; 
+                height: 56px; 
+                padding: 12px 8px;
+                font-size: 0.85rem;
+            }
+            .book-name, .sub-name, .scene-name { font-size: 0.85rem; }
+            .unit-title { font-size: 0.95rem; }
         }
         @media (max-width: 480px) {
             .swipe-btn { font-size: 0.8rem; padding: 10px 4px; }
             .meaning-example-area { font-size: 13px; padding: 12px; }
             .module-btn { padding: 8px 20px; font-size: 13px; }
             .sub-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-            .book-card, .sub-card { min-height: 60px; padding: 16px 8px; }
-            .book-name, .sub-name { font-size: 0.8rem; }
+            .book-card, .sub-card, .scene-card, .unit-card { 
+                min-height: 48px; 
+                height: 48px; 
+                padding: 8px 6px;
+                font-size: 0.75rem;
+            }
+            .book-name, .sub-name, .scene-name { font-size: 0.75rem; }
+            .unit-title { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -700,7 +723,6 @@
 
     function openVideoPlayer() {
         showScreen('screen-video');
-        // 延迟初始化，确保DOM渲染完成
         setTimeout(() => {
             if (typeof videoPlayerInitialized === 'undefined' || !videoPlayerInitialized) {
                 initVideoPlayer();
@@ -826,9 +848,17 @@
     let currentVideoIndex = 0;
 
     function buildHome() {
+        // 分级词汇
         const levels = ['A1 词汇','A2 词汇','B1 词汇','B2 词汇','C1 词汇','C2 词汇'];
-        document.getElementById('level-books').innerHTML = levels.map(lvl => `<div class="book-card" onclick="openLevelUnits('${lvl.replace(' 词汇', '')}')"><div class="book-name">${lvl}</div></div>`).join('');
-        document.getElementById('scene-books').innerHTML = sceneList.map(scene => `<div class="book-card" onclick="openSceneBook('${scene}')"><div class="book-name">${scene}</div></div>`).join('');
+        document.getElementById('level-books').innerHTML = levels.map(lvl => {
+            const key = lvl.replace(' 词汇', '');
+            return `<div class="book-card" onclick="openLevelUnits('${key}')"><div class="book-name">${lvl}</div></div>`;
+        }).join('');
+        
+        // 生活场景词汇
+        document.getElementById('scene-books').innerHTML = sceneList.map(scene => 
+            `<div class="scene-card" onclick="openSceneBook('${scene}')"><div class="scene-name">${scene}</div></div>`
+        ).join('');
     }
 
     window.openLevelUnits = (key) => {
@@ -976,7 +1006,7 @@
     window.openMistakeBook = () => alert(`📕 生词本: ${reviewLog.length ? reviewLog.join(', ') : '空'}`);
 
     // ================================================================
-    // 视频播放器 - 稳定版本
+    // 视频播放器
     // ================================================================
     function initVideoPlayer() {
         const video = document.getElementById('mainVideo');
