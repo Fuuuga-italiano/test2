@@ -28,7 +28,7 @@
 
         .card, .top-bar, .book-card, .swipe-btn, .global-header, .word-card-main,
         .audio-btn-sm, .stats-badge, .calendar-section, .module-btn, .collapsible-header,
-        .back-btn, .unit-card {
+        .back-btn, .unit-card, .sub-card {
             border-radius: 20px;
         }
 
@@ -93,18 +93,31 @@
             border-radius: 16px;
         }
 
-        .book-card { 
+        /* 统一卡片样式 */
+        .book-card, .sub-card {
             background: #FFFFFF;
             border: 1px solid #D0C8BC;
+            padding: 24px 12px;
+            cursor: pointer;
             transition: all 0.2s ease;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .book-card:hover { 
-            transform: translateY(-3px); 
-            border-color: #F2D04E; 
+        .book-card:hover, .sub-card:hover {
+            transform: translateY(-3px);
+            border-color: #F2D04E;
             background: #FFFDF8;
             box-shadow: 0 12px 20px rgba(0,0,0,0.05);
         }
-        .book-name { font-weight: 590; font-size: 1rem; margin-bottom: 0px; color: #24221B; }
+        .book-name, .sub-name {
+            font-weight: 590;
+            font-size: 1rem;
+            color: #24221B;
+        }
         .book-desc { display: none; }
 
         .global-header {
@@ -186,30 +199,15 @@
         .collapsible-content { display: none; padding-top: 24px; }
         .collapsible-content.open { display: block; }
 
-        .book-grid {
+        /* 网格布局统一 */
+        .book-grid, .scene-grid, .sub-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: 20px;
             margin-bottom: 16px;
         }
-        .book-card {
-            background: #FFFFFF;
-            border: 1px solid #D0C8BC;
-            padding: 24px 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .book-card:hover { transform: translateY(-3px); border-color: #F2D04E; background: #FFFFFF; }
-        .book-name { font-weight: 590; font-size: 1rem; margin-bottom: 0px; color: #24221B; }
-
-        .scene-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            margin-bottom: 16px;
-        }
+        .book-grid { grid-template-columns: repeat(3, 1fr); }
+        .scene-grid { grid-template-columns: repeat(2, 1fr); }
+        .sub-grid { grid-template-columns: repeat(3, 1fr); }
 
         .unit-grid {
             display: grid;
@@ -225,6 +223,11 @@
             transition: all 0.2s ease;
             text-align: center;
             box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border-radius: 20px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .unit-card:hover { transform: translateY(-3px); border-color: #F2D04E; background: #FFFFF8; }
         .unit-title { font-weight: 600; font-size: 1.1rem; color: #24221B; }
@@ -257,36 +260,9 @@
         }
         .top-bar-title { flex: 1; font-weight: 590; font-size: 1.2rem; color: #24221B; text-align: center; }
 
-        .sub-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 8px;
-        }
-        .sub-card {
-            background: #FFFFFF;
-            border: 1px solid #D0C8BC;
-            padding: 24px 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-            border-radius: 20px;
-        }
-        .sub-card:hover {
-            transform: translateY(-3px);
-            border-color: #F2D04E;
-            background: #FFFDF8;
-            box-shadow: 0 12px 20px rgba(0,0,0,0.05);
-        }
         .sub-card.active-sub {
             border-color: #F2D04E;
             background: #FFFDF8;
-        }
-        .sub-name {
-            font-weight: 590;
-            font-size: 1rem;
-            color: #24221B;
         }
 
         /* ===== 视频播放器 ===== */
@@ -311,9 +287,9 @@
         .video-placeholder {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
-            background: #1a1a24;
+            background: #0a0a0e;
         }
 
         .video-overlay-tip {
@@ -413,7 +389,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             gap: 12px;
             max-width: 900px;
             margin-left: auto;
@@ -451,15 +427,6 @@
             color: #24221B;
             border-color: #F2D04E;
             box-shadow: 0 0 8px #F2D04E66;
-        }
-
-        .status-badge {
-            font-size: 0.7rem;
-            background: #00000066;
-            padding: 4px 12px;
-            border-radius: 50px;
-            color: #F2D04E;
-            font-weight: 500;
         }
 
         .glow-text {
@@ -566,23 +533,6 @@
         }
         #memory-tips { color: #24221B; }
 
-        @media (max-width: 640px) {
-            .italian-text { font-size: 1.4rem; }
-            .chinese-text { font-size: 0.9rem; }
-            .lyrics-viewport { height: 160px; }
-            .lyric-line { min-height: 130px; padding: 0.8rem 0.5rem; }
-            .sub-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 12px;
-            }
-            .sub-card {
-                padding: 14px 8px;
-            }
-            .sub-name {
-                font-size: 0.85rem;
-            }
-        }
-
         @media (max-width: 860px) {
             .container { padding: 0 24px; }
             .book-grid { grid-template-columns: repeat(2, 1fr); }
@@ -594,27 +544,25 @@
             .container { padding: 0 16px; }
             .book-grid { grid-template-columns: 1fr; gap: 16px; }
             .scene-grid { grid-template-columns: 1fr; }
+            .sub-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
             .unit-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
             .hero-welcome { padding: 20px; margin: 24px 0; }
             .swipe-btn { padding: 12px 6px; font-size: 0.9rem; min-width: 85px; }
             .study-area { padding: 0 16px; margin: 24px auto; }
             .word-card-main { padding: 28px 20px; }
             .italian-word { font-size: 2rem; }
+            .italian-text { font-size: 1.4rem; }
+            .chinese-text { font-size: 0.9rem; }
+            .lyrics-viewport { height: 160px; }
+            .lyric-line { min-height: 130px; padding: 0.8rem 0.5rem; }
         }
         @media (max-width: 480px) {
             .swipe-btn { font-size: 0.8rem; padding: 10px 4px; }
             .meaning-example-area { font-size: 13px; padding: 12px; }
             .module-btn { padding: 8px 20px; font-size: 13px; }
-            .sub-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 8px;
-            }
-            .sub-card {
-                padding: 12px 6px;
-            }
-            .sub-name {
-                font-size: 0.75rem;
-            }
+            .sub-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+            .book-card, .sub-card { min-height: 60px; padding: 16px 8px; }
+            .book-name, .sub-name { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -636,6 +584,7 @@
             <p>每个微小的进步都算数</p>
         </div>
 
+        <!-- 分级词汇 -->
         <div class="collapsible-section">
             <div class="collapsible-header" onclick="toggleCollapse('level-collapse')">
                 <span>📚 分级词汇（欧标全阶）</span><span class="arrow" id="level-arrow">▼</span>
@@ -645,6 +594,7 @@
             </div>
         </div>
 
+        <!-- 生活场景词汇 -->
         <div class="collapsible-section">
             <div class="collapsible-header" onclick="toggleCollapse('scene-collapse')">
                 <span>🌿 生活场景词汇</span><span class="arrow" id="scene-arrow">▼</span>
@@ -654,6 +604,7 @@
             </div>
         </div>
 
+        <!-- 沉浸式学意语 -->
         <div class="collapsible-section">
             <div class="collapsible-header" onclick="toggleCollapse('special-collapse')">
                 <span>🎧 沉浸式学意语</span><span class="arrow" id="special-arrow">▼</span>
@@ -702,7 +653,6 @@
                     <div class="time-info">
                         <span id="currentTimeDisplay">0:00</span> / <span id="durationDisplay">0:00</span>
                     </div>
-                    <div class="status-badge" id="videoCounter">1 / 5</div>
                 </div>
                 <div class="glow-text">播放完当前视频后自动暂停，点击"播放"播放下一个</div>
             </div>
@@ -750,25 +700,19 @@
 
     function openVideoPlayer() {
         showScreen('screen-video');
-        // 每次都重新初始化，确保视频加载
+        // 延迟初始化，确保DOM渲染完成
         setTimeout(() => {
             if (typeof videoPlayerInitialized === 'undefined' || !videoPlayerInitialized) {
                 initVideoPlayer();
-            } else {
-                // 如果已初始化，确保视频加载
-                const video = document.getElementById('mainVideo');
-                if (video && video.paused && video.currentTime === 0) {
-                    loadVideo(0);
-                }
             }
-        }, 100);
+        }, 300);
     }
 
     function showComingSoon(name) {
         alert(`${name} 内容持续更新中，敬请期待...`);
     }
 
-    // ===== 音频播放工具 =====
+    // ===== 音频播放 =====
     function playLocalAudio(filename) {
         const audio = new Audio(filename);
         audio.play().catch(e => console.warn('音频播放失败:', filename, e));
@@ -783,7 +727,7 @@
         window.speechSynthesis.speak(utterance);
     }
 
-    // ===== 折叠功能 =====
+    // ===== 折叠 =====
     window.toggleCollapse = function(collapseId) {
         const content = document.getElementById(collapseId);
         const arrowId = collapseId.replace('collapse', 'arrow');
@@ -1032,7 +976,7 @@
     window.openMistakeBook = () => alert(`📕 生词本: ${reviewLog.length ? reviewLog.join(', ') : '空'}`);
 
     // ================================================================
-    // 视频播放器 - 完整可用版本
+    // 视频播放器 - 稳定版本
     // ================================================================
     function initVideoPlayer() {
         const video = document.getElementById('mainVideo');
@@ -1040,11 +984,9 @@
         const playPauseBtn = document.getElementById('playPauseBtn');
         const currentTimeSpan = document.getElementById('currentTimeDisplay');
         const durationSpan = document.getElementById('durationDisplay');
-        const videoCounter = document.getElementById('videoCounter');
 
         let isEndedPause = false;
 
-        // 构建字幕列表
         function buildLyricsList() {
             lyricsTrack.innerHTML = '';
             videoList.forEach((item, idx) => {
@@ -1075,7 +1017,6 @@
 
         function loadVideo(index) {
             if (index >= videoList.length) {
-                videoCounter.textContent = '🎉 全部完成！';
                 playPauseBtn.innerHTML = '🔄 重新播放';
                 video.style.display = 'none';
                 document.querySelector('.video-overlay-tip').textContent = '🎉 全部完成！';
@@ -1091,7 +1032,6 @@
             highlightLine(index);
             setTimeout(() => updateTrackPosition(index), 50);
             playPauseBtn.innerHTML = '▶ 播放';
-            videoCounter.textContent = `${index + 1} / ${videoList.length}`;
         }
 
         function loadNextVideo() {
@@ -1113,7 +1053,6 @@
             durationSpan.textContent = formatTime(duration);
         }
 
-        // 视频事件
         video.addEventListener('loadedmetadata', () => {
             durationSpan.textContent = formatTime(video.duration);
             updateTimeDisplay();
@@ -1121,41 +1060,28 @@
 
         video.addEventListener('timeupdate', updateTimeDisplay);
 
-        // 关键：视频播放结束 → 暂停，等待用户操作
         video.addEventListener('ended', function() {
             if (isEndedPause) return;
             isEndedPause = true;
             video.pause();
-            
             if (currentVideoIndex + 1 >= videoList.length) {
-                // 最后一个视频播放完毕
                 playPauseBtn.innerHTML = '🔄 重新播放';
-                videoCounter.textContent = '🎉 全部完成！';
             } else {
                 playPauseBtn.innerHTML = '▶ 播放下一集';
-                videoCounter.textContent = `${currentVideoIndex + 1} / ${videoList.length} ✓`;
             }
         });
 
-        // 播放/暂停按钮
         playPauseBtn.addEventListener('click', function() {
-            // 如果全部完成，重新开始
             if (currentVideoIndex >= videoList.length) {
                 loadVideo(0);
+                setTimeout(() => video.play().catch(() => {}), 300);
                 return;
             }
-
-            // 如果是"播放下一集"状态
             if (this.innerHTML === '▶ 播放下一集') {
                 loadNextVideo();
-                // 自动播放下一个
-                setTimeout(() => {
-                    video.play().catch(() => {});
-                }, 300);
+                setTimeout(() => video.play().catch(() => {}), 300);
                 return;
             }
-
-            // 正常播放/暂停
             if (video.paused) {
                 video.play().catch(() => {});
             } else {
@@ -1175,7 +1101,6 @@
             }
         });
 
-        // 点击字幕切换视频
         lyricsTrack.addEventListener('click', function(e) {
             const line = e.target.closest('.lyric-line');
             if (!line) return;
@@ -1183,22 +1108,15 @@
             if (!isNaN(idx) && idx >= 0 && idx < videoList.length) {
                 if (idx === currentVideoIndex) {
                     video.currentTime = 0;
-                    if (video.paused) {
-                        video.play().catch(() => {});
-                    }
+                    if (video.paused) video.play().catch(() => {});
                 } else {
                     loadVideo(idx);
-                    setTimeout(() => {
-                        video.play().catch(() => {});
-                    }, 300);
+                    setTimeout(() => video.play().catch(() => {}), 300);
                 }
             }
         });
 
-        // 错误处理
-        video.addEventListener('error', function(e) {
-            console.warn('视频加载失败:', video.src);
-            // 尝试加载下一个
+        video.addEventListener('error', function() {
             if (currentVideoIndex + 1 < videoList.length) {
                 setTimeout(() => loadNextVideo(), 500);
             }
@@ -1209,14 +1127,6 @@
 
         videoPlayerInitialized = true;
     }
-
-    // 页面加载完成后初始化
-    document.addEventListener('DOMContentLoaded', function() {
-        // 如果当前在视频页面，初始化播放器
-        if (document.getElementById('screen-video').classList.contains('active')) {
-            setTimeout(initVideoPlayer, 200);
-        }
-    });
 
     buildHome();
 </script>
