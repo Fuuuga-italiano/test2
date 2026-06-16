@@ -290,7 +290,7 @@
             border-radius: 24px;
         }
 
-        /* 发音按钮区域 - 支持本地音频 */
+        /* 发音按钮区域 */
         .pronounce-area { 
             display: flex; 
             justify-content: center; 
@@ -732,22 +732,20 @@
         });
     });
 
-    // ===== A1 词汇数据 (带音频文件名) =====
-    // 格式: 单词音频 a1(1), a1(2)... 例句音频对应 a1(1) 为单词, a1(2) 为例句
+    // ===== A1 词汇数据 (音频文件名已改为下划线格式) =====
     const originalA1Words = [
-        { it: "ciao", zh: "你好/再见（非正式）", count: "35次", example: "Ciao, come stai?  嗨，你好吗？", wordAudio: "a1(1).mp3", exampleAudio: "a1(2).mp3" },
-        { it: "grazie", zh: "谢谢", count: "42次", example: "Grazie per il tuo aiuto.  谢谢你的帮助。", wordAudio: "a2(1).mp3", exampleAudio: "a2(2).mp3" },
-        { it: "sì", zh: "是", count: "58次", example: "Sì, vorrei un caffè.  是的，我要一杯咖啡。", wordAudio: "a3(1).mp3", exampleAudio: "a3(2).mp3" },
-        // 补充更多A1词汇以丰富内容（使用已有音频规则延伸）
-        { it: "no", zh: "不是", count: "47次", example: "No, grazie.  不了，谢谢。", wordAudio: "a1(1).mp3", exampleAudio: "a1(2).mp3" },
-        { it: "per favore", zh: "请", count: "33次", example: "Un bicchiere d'acqua, per favore.  请给我一杯水。", wordAudio: "a2(1).mp3", exampleAudio: "a2(2).mp3" },
-        { it: "studente", zh: "学生", count: "27次", example: "Io sono studente.  我是学生。", wordAudio: "a3(1).mp3", exampleAudio: "a3(2).mp3" },
-        { it: "casa", zh: "家", count: "40次", example: "Torno a casa.  我回家。", wordAudio: "a1(1).mp3", exampleAudio: "a1(2).mp3" },
-        { it: "amico", zh: "朋友（阳性）", count: "31次", example: "Lui è il mio amico.  他是我的朋友。", wordAudio: "a2(1).mp3", exampleAudio: "a2(2).mp3" },
-        { it: "amica", zh: "朋友（阴性）", count: "29次", example: "Lei è la mia amica.  她是我的朋友。", wordAudio: "a3(1).mp3", exampleAudio: "a3(2).mp3" },
-        { it: "mangiare", zh: "吃", count: "44次", example: "Io mangio una pizza.  我吃披萨。", wordAudio: "a1(1).mp3", exampleAudio: "a1(2).mp3" },
-        { it: "bere", zh: "喝", count: "38次", example: "Tu bevi l'acqua.  你喝水。", wordAudio: "a2(1).mp3", exampleAudio: "a2(2).mp3" },
-        { it: "felice", zh: "高兴的", count: "26次", example: "Sono felice oggi.  我今天很开心。", wordAudio: "a3(1).mp3", exampleAudio: "a3(2).mp3" }
+        { it: "ciao", zh: "你好/再见（非正式）", count: "35次", example: "Ciao, come stai?  嗨，你好吗？", wordAudio: "a1_1.mp3", exampleAudio: "a1_2.mp3" },
+        { it: "grazie", zh: "谢谢", count: "42次", example: "Grazie per il tuo aiuto.  谢谢你的帮助。", wordAudio: "a2_1.mp3", exampleAudio: "a2_2.mp3" },
+        { it: "sì", zh: "是", count: "58次", example: "Sì, vorrei un caffè.  是的，我要一杯咖啡。", wordAudio: "a3_1.mp3", exampleAudio: "a3_2.mp3" },
+        { it: "no", zh: "不是", count: "47次", example: "No, grazie.  不了，谢谢。", wordAudio: "a1_1.mp3", exampleAudio: "a1_2.mp3" },
+        { it: "per favore", zh: "请", count: "33次", example: "Un bicchiere d'acqua, per favore.  请给我一杯水。", wordAudio: "a2_1.mp3", exampleAudio: "a2_2.mp3" },
+        { it: "studente", zh: "学生", count: "27次", example: "Io sono studente.  我是学生。", wordAudio: "a3_1.mp3", exampleAudio: "a3_2.mp3" },
+        { it: "casa", zh: "家", count: "40次", example: "Torno a casa.  我回家。", wordAudio: "a1_1.mp3", exampleAudio: "a1_2.mp3" },
+        { it: "amico", zh: "朋友（阳性）", count: "31次", example: "Lui è il mio amico.  他是我的朋友。", wordAudio: "a2_1.mp3", exampleAudio: "a2_2.mp3" },
+        { it: "amica", zh: "朋友（阴性）", count: "29次", example: "Lei è la mia amica.  她是我的朋友。", wordAudio: "a3_1.mp3", exampleAudio: "a3_2.mp3" },
+        { it: "mangiare", zh: "吃", count: "44次", example: "Io mangio una pizza.  我吃披萨。", wordAudio: "a1_1.mp3", exampleAudio: "a1_2.mp3" },
+        { it: "bere", zh: "喝", count: "38次", example: "Tu bevi l'acqua.  你喝水。", wordAudio: "a2_1.mp3", exampleAudio: "a2_2.mp3" },
+        { it: "felice", zh: "高兴的", count: "26次", example: "Sono felice oggi.  我今天很开心。", wordAudio: "a3_1.mp3", exampleAudio: "a3_2.mp3" }
     ];
 
     const a1Units = [];
@@ -759,36 +757,35 @@
         }
     }
 
-    // ===== 超市购物词汇 (带音频文件名) =====
+    // ===== 超市购物词汇 (音频文件名已改为下划线格式) =====
     const supermarketWords = [
-        { it: "supermercato", zh: "超市", count: "28次", example: "Vado al supermercato.  我去超市。", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" },
-        { it: "carrello", zh: "购物车", count: "19次", example: "Prendo un carrello.  我推一辆购物车。", wordAudio: "b2(1).mp3", exampleAudio: "b2(2).mp3" },
-        { it: "lista della spesa", zh: "购物清单", count: "14次", example: "Ho la lista della spesa.  我有购物清单。", wordAudio: "b3(1).mp3", exampleAudio: "b3(2).mp3" },
-        // 补充更多超市词汇
-        { it: "prezzo", zh: "价格", count: "33次", example: "Qual è il prezzo?  价格是多少？", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" },
-        { it: "sconto", zh: "折扣", count: "22次", example: "C'è uno sconto su questo prodotto.  这个产品有折扣。", wordAudio: "b2(1).mp3", exampleAudio: "b2(2).mp3" },
-        { it: "scadenza", zh: "保质期/到期日", count: "16次", example: "Controlla la data di scadenza.  检查一下保质期。", wordAudio: "b3(1).mp3", exampleAudio: "b3(2).mp3" },
-        { it: "cassa", zh: "收银台", count: "25次", example: "Pago alla cassa.  我在收银台付款。", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" },
-        { it: "scontrino", zh: "收据/小票", count: "21次", example: "Vuole lo scontrino?  您要小票吗？", wordAudio: "b2(1).mp3", exampleAudio: "b2(2).mp3" },
-        { it: "sacchetto", zh: "袋子（塑料袋）", count: "15次", example: "Ha bisogno di un sacchetto?  您需要袋子吗？", wordAudio: "b3(1).mp3", exampleAudio: "b3(2).mp3" },
-        { it: "pagare", zh: "付款", count: "41次", example: "Posso pagare con la carta?  我可以刷卡吗？", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" }
+        { it: "supermercato", zh: "超市", count: "28次", example: "Vado al supermercato.  我去超市。", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" },
+        { it: "carrello", zh: "购物车", count: "19次", example: "Prendo un carrello.  我推一辆购物车。", wordAudio: "b2_1.mp3", exampleAudio: "b2_2.mp3" },
+        { it: "lista della spesa", zh: "购物清单", count: "14次", example: "Ho la lista della spesa.  我有购物清单。", wordAudio: "b3_1.mp3", exampleAudio: "b3_2.mp3" },
+        { it: "prezzo", zh: "价格", count: "33次", example: "Qual è il prezzo?  价格是多少？", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" },
+        { it: "sconto", zh: "折扣", count: "22次", example: "C'è uno sconto su questo prodotto.  这个产品有折扣。", wordAudio: "b2_1.mp3", exampleAudio: "b2_2.mp3" },
+        { it: "scadenza", zh: "保质期/到期日", count: "16次", example: "Controlla la data di scadenza.  检查一下保质期。", wordAudio: "b3_1.mp3", exampleAudio: "b3_2.mp3" },
+        { it: "cassa", zh: "收银台", count: "25次", example: "Pago alla cassa.  我在收银台付款。", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" },
+        { it: "scontrino", zh: "收据/小票", count: "21次", example: "Vuole lo scontrino?  您要小票吗？", wordAudio: "b2_1.mp3", exampleAudio: "b2_2.mp3" },
+        { it: "sacchetto", zh: "袋子（塑料袋）", count: "15次", example: "Ha bisogno di un sacchetto?  您需要袋子吗？", wordAudio: "b3_1.mp3", exampleAudio: "b3_2.mp3" },
+        { it: "pagare", zh: "付款", count: "41次", example: "Posso pagare con la carta?  我可以刷卡吗？", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" }
     ];
 
     // ===== 场景词汇库 =====
     const sceneWordsLibrary = {
         "超市购物": supermarketWords,
-        "交通出行": [{ it: "biglietto", zh: "车票", count: "18次", example: "Un biglietto di sola andata.  一张单程票。", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" }],
-        "咖啡与餐厅点餐": [{ it: "ordinare", zh: "点餐", count: "20次", example: "Ordino un caffè.  我点一杯咖啡。", wordAudio: "b2(1).mp3", exampleAudio: "b2(2).mp3" }],
-        "银行与邮局": [{ it: "conto", zh: "账户", count: "14次", example: "Aprire un conto.  开账户。", wordAudio: "b3(1).mp3", exampleAudio: "b3(2).mp3" }],
-        "租房与家居": [{ it: "affitto", zh: "租金", count: "12次", example: "Pagare l'affitto.  付租金。", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" }],
-        "问路与方向": [{ it: "girare", zh: "转弯", count: "11次", example: "Gira a destra.  向右转。", wordAudio: "b2(1).mp3", exampleAudio: "b2(2).mp3" }],
-        "看病与买药": [{ it: "farmacia", zh: "药店", count: "14次", example: "Vado in farmacia.  我去药店。", wordAudio: "b3(1).mp3", exampleAudio: "b3(2).mp3" }],
-        "旅游": [{ it: "viaggio", zh: "旅行", count: "17次", example: "Buon viaggio!  旅途愉快！", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" }],
-        "理发": [{ it: "taglio", zh: "理发", count: "10次", example: "Vorrei un taglio.  我想理发。", wordAudio: "b2(1).mp3", exampleAudio: "b2(2).mp3" }],
-        "美甲": [{ it: "unghie", zh: "美甲", count: "7次", example: "Pulire le unghie.  清洁指甲。", wordAudio: "b3(1).mp3", exampleAudio: "b3(2).mp3" }],
-        "天气与闲聊": [{ it: "sole", zh: "太阳", count: "20次", example: "Che bel sole!  多美的太阳！", wordAudio: "b1(1).mp3", exampleAudio: "b1(2).mp3" }],
-        "紧急情况": [{ it: "aiuto", zh: "救命", count: "13次", example: "Aiuto!  救命！", wordAudio: "b2(1).mp3", exampleAudio: "b2(2).mp3" }],
-        "商务用语": [{ it: "contratto", zh: "合同", count: "15次", example: "Firmare il contratto.  签合同。", wordAudio: "b3(1).mp3", exampleAudio: "b3(2).mp3" }]
+        "交通出行": [{ it: "biglietto", zh: "车票", count: "18次", example: "Un biglietto di sola andata.  一张单程票。", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" }],
+        "咖啡与餐厅点餐": [{ it: "ordinare", zh: "点餐", count: "20次", example: "Ordino un caffè.  我点一杯咖啡。", wordAudio: "b2_1.mp3", exampleAudio: "b2_2.mp3" }],
+        "银行与邮局": [{ it: "conto", zh: "账户", count: "14次", example: "Aprire un conto.  开账户。", wordAudio: "b3_1.mp3", exampleAudio: "b3_2.mp3" }],
+        "租房与家居": [{ it: "affitto", zh: "租金", count: "12次", example: "Pagare l'affitto.  付租金。", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" }],
+        "问路与方向": [{ it: "girare", zh: "转弯", count: "11次", example: "Gira a destra.  向右转。", wordAudio: "b2_1.mp3", exampleAudio: "b2_2.mp3" }],
+        "看病与买药": [{ it: "farmacia", zh: "药店", count: "14次", example: "Vado in farmacia.  我去药店。", wordAudio: "b3_1.mp3", exampleAudio: "b3_2.mp3" }],
+        "旅游": [{ it: "viaggio", zh: "旅行", count: "17次", example: "Buon viaggio!  旅途愉快！", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" }],
+        "理发": [{ it: "taglio", zh: "理发", count: "10次", example: "Vorrei un taglio.  我想理发。", wordAudio: "b2_1.mp3", exampleAudio: "b2_2.mp3" }],
+        "美甲": [{ it: "unghie", zh: "美甲", count: "7次", example: "Pulire le unghie.  清洁指甲。", wordAudio: "b3_1.mp3", exampleAudio: "b3_2.mp3" }],
+        "天气与闲聊": [{ it: "sole", zh: "太阳", count: "20次", example: "Che bel sole!  多美的太阳！", wordAudio: "b1_1.mp3", exampleAudio: "b1_2.mp3" }],
+        "紧急情况": [{ it: "aiuto", zh: "救命", count: "13次", example: "Aiuto!  救命！", wordAudio: "b2_1.mp3", exampleAudio: "b2_2.mp3" }],
+        "商务用语": [{ it: "contratto", zh: "合同", count: "15次", example: "Firmare il contratto.  签合同。", wordAudio: "b3_1.mp3", exampleAudio: "b3_2.mp3" }]
     };
 
     const sceneList = [
@@ -816,7 +813,6 @@
         const levels = ['A1 词汇','A2 词汇','B1 词汇','B2 词汇','C1 词汇','C2 词汇'];
         document.getElementById('level-books').innerHTML = levels.map(lvl => `<div class="book-card" onclick="openLevelUnits('${lvl.replace(' 词汇', '')}')"><div class="book-name">${lvl}</div></div>`).join('');
         document.getElementById('scene-books').innerHTML = sceneList.map(scene => `<div class="book-card" onclick="openSceneBook('${scene}')"><div class="book-name">${scene}</div></div>`).join('');
-        // 沉浸式学意语已由HTML直接渲染，无需额外生成
     }
 
     // ===== 打开级别词汇 =====
